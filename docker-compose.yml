@@ -1,0 +1,16 @@
+services:
+
+  nginx:
+    image: ${NGINX_IMAGE}
+    container_name: nginx-file-server
+    ports: 
+      - "${HTTP_OUTBOUND_PORT}:80"
+      - "${HTTPS_OUTBOUND_PORT}:443"
+    volumes: 
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./log:/var/log/nginx
+      - nginx-data:/www/data
+
+volumes: 
+  nginx-data:
+    external: true
